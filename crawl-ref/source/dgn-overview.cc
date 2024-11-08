@@ -446,6 +446,12 @@ static string _get_altars(bool display)
     disp += _print_altars_for_gods(temple_god_list(), true, display);
     disp += _print_altars_for_gods(nontemple_god_list(), false, display);
 
+   // Add the legend for altar statuses
+    disp += "\n\n<white>Legend:</white>\n";
+    disp += "<green>+</green> Available Altar\n";
+    disp += "<red>x</red> Unavailable Altar\n";
+    disp += "<blue>*</blue> Locked Altar\n";
+
     return disp;
 }
 
@@ -707,12 +713,6 @@ protected:
 void display_overview()
 {
     string disp = overview_description_string(true);
-
-    // Add the key for altar symbols at the bottom of the display
-    disp += "\n\n<white>Legend:</white>\n";
-    disp += "<green>+</green> Available Altar\n";
-    disp += "<red>x</red> Unavailable Altar\n";
-    disp += "<blue>*</blue> Locked Altar\n";
 
     linebreak_string(disp, 80);
     dgn_overview overview(disp);
