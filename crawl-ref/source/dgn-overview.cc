@@ -512,7 +512,16 @@ static string _print_altars_for_gods(const vector<god_type>& gods,
         if (is_unavailable_god(god))
             colour = "darkgrey";
 
-        string disp_name = uppercase_first(god_name(god, false));
+        // Determine the symbol for the altar
+        string symbol = " ";
+        if (!has_altar_been_seen)
+            symbol = "<red>x</red>";  // Unavailable
+        else if (is_unavailable_god(god))
+            symbol = "<blue>*</blue>";  // Locked
+        else
+            symbol = "<green>+</green>";  // Available
+
+        string disp_name = symbol + " " + uppercase_first(god_name(god, false));
         if (god == GOD_GOZAG && !you_worship(GOD_GOZAG))
             disp_name += make_stringf(" ($%d)", gozag_service_fee());
 
